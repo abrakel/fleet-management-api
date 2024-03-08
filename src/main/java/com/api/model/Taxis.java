@@ -1,9 +1,6 @@
 package com.api.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity //indica que es una entidad que hace referencia a la base de datos
 @Table(name="taxis") //para hacer referencia a esta tabla de la base de datos

@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/taxis")
 public class TaxisController {
 
     @Autowired //Hace que la clase cree un objeto automáticamente y lo guarde en esa variable
     private TaxisService taxisService;
 
-    @GetMapping("/id/{id}")
-    public ResponseEntity<Taxis> getById(@PathVariable Long id){
+    @GetMapping("/id")
+    public ResponseEntity<Taxis> getById(@RequestParam Long id){
             Optional<Taxis> list = taxisService.findById(id);
             if (list.isPresent()) {
                 Taxis taxi = list.get();
@@ -29,8 +29,8 @@ public class TaxisController {
             }
     }
 
-    @GetMapping("/plate/{plate}")
-    public ResponseEntity<Taxis> getByPlate(@PathVariable String plate){
+    @GetMapping("/plate")
+    public ResponseEntity<Taxis> getByPlate(@RequestParam String plate){
         Optional<Taxis> list = taxisService.findByPlate(plate);
         if (list != null) {
             Taxis taxi = list.get();
@@ -40,7 +40,7 @@ public class TaxisController {
         }
     }
 
-    @GetMapping("/taxis")
+    @GetMapping("/all")
     public ResponseEntity<Page<Taxis>> getAll(@PageableDefault(page = 0, size = 10) Pageable pageable){
         Page<Taxis> listAll = taxisService.findAll(pageable);
         return new ResponseEntity<>(listAll, HttpStatus.OK);
