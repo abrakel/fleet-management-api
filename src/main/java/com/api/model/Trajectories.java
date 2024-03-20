@@ -3,7 +3,9 @@ package com.api.model;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="trajectories")
@@ -18,7 +20,7 @@ public class Trajectories {
     private Taxis taxiId;
 
     @Column(name="date")
-    private Date date;
+    private LocalDateTime date;
 
     @Column(name="latitude")
     private Double latitude;
@@ -42,11 +44,11 @@ public class Trajectories {
         this.taxiId = taxiId;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

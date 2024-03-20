@@ -10,6 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/trajectories")
 public class TrajectoriesController {
@@ -25,6 +29,18 @@ public class TrajectoriesController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/location")
+    public ResponseEntity<Object> getLastLocation (Pageable pageable){
+        Map<String, Object> map = new HashMap<>();
+        try {
+            Page<Trajectories> lastLocation = trajectoriesService.findLastLocation(pageable);
+            return new ResponseEntity<>(lastLocation, HttpStatus.OK);
+        } catch (Exception e){
+            map.put("message", e.getMessage());
+            return new ResponseEntity<>(map, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

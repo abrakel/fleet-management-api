@@ -7,8 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
-import java.sql.Timestamp;
+
+import java.util.List;
 
 @Service
 public class TrajectoriesImplement implements TrajectoriesService{
@@ -17,6 +17,10 @@ public class TrajectoriesImplement implements TrajectoriesService{
 
      public Page<Trajectories> findTrajectoriesByIdAndDate(Long taxiId, String date, Pageable pageable){
          return trajectoriesR.findTrajectoriesByIdAndDate(taxiId, date, pageable);
+     }
+
+     public Page<Trajectories> findLastLocation(Pageable pageable){
+         return trajectoriesR.findLastLocation(pageable);
      }
 
 }
