@@ -10,5 +10,6 @@ import java.util.List;
 
 public interface TrajectoriesService {
     Page<Trajectories> findTrajectoriesByIdAndDate(Long taxiId, String date, Pageable pageable);
-    Page<Trajectories> findLastLocation(Pageable pageable);
+
+    Page<Trajectories>findLastLocation(Integer page, Integer Size);
 }

@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TrajectoriesR extends JpaRepository<Trajectories, Long> {
     @Query(value = "SELECT * FROM trajectories WHERE taxi_id = :taxiId AND TO_CHAR (date, 'dd-MM-yyyy') = :date", nativeQuery = true)
@@ -17,5 +19,5 @@ public interface TrajectoriesR extends JpaRepository<Trajectories, Long> {
             "JOIN Taxis r ON t.taxi_id = r.id " +
             "WHERE (t.taxi_id, t.date) IN (SELECT taxi_id, MAX(date) " +
             "FROM Trajectories GROUP BY taxi_id)", nativeQuery = true)
-    Page<Trajectories> findLastLocation(Pageable pageable);
+    List<Trajectories>findLastLocation(Pageable pageable);
 }
